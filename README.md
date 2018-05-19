@@ -25,7 +25,8 @@ $ git clone --recursive https://github.com/josephRice/parlor.git
 If you already cloned with out the --recursive flag not to worry.  From your cloned project directory run the following.
 
 ```
-$ git submodule foreach --recursive git submodule update --init
+$ git submodule init
+$ git submodule update --recursive --remote --init
 ```
 
 ## Dependancies
