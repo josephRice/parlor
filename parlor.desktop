@@ -5,4 +5,5 @@ Name=Parlor
 Comment=native frontend for the lounge IRC client
 Exec=/usr/bin/parlor
 Icon=/usr/share/icons/parlor.png
+Categories=Network;IRCClient;
 Terminal=false
