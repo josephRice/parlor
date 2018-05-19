@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(parlor)
+
+if(APPLE)
+        set(WEBVIEW_COMPILE_DEFS "-DWEBVIEW_COCOA=1")
+        set(WEBVIEW_COMPILE_OPTS "-ObjC")
+        set(WEBVIEW_LIBS "-framework Cocoa" "-framework WebKit")
+else()
+        set(WEBVIEW_COMPILE_DEFS "-DWEBVIEW_GTK=1")
+        find_package(PkgConfig REQUIRED)
+        pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+        pkg_check_modules(WEBKIT2 REQUIRED webkit2gtk-4.0)
+        set(WEBVIEW_COMPILE_INCS ${GTK3_INCLUDE_DIRS} ${WEBKIT2_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR})
+        set(WEBVIEW_LIBS ${GTK3_LIBRARIES} ${WEBKIT2_LIBRARIES})
+endif()
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/webview)
+add_executable(parlor MACOSX_BUNDLE main.c)
+if (APPLE)
+	target_compile_options(parlor PRIVATE "-ObjC")
+endif()
+target_link_libraries(parlor PUBLIC webview)
+
+install(TARGETS parlor DESTINATION /usr/bin/)
+install(FILES parlor.desktop DESTINATION /usr/share/applications/)
+install(FILES icons/parlor.png DESTINATION /usr/share/icons/)

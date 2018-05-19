@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Parlor
+Comment=native frontend for the lounge IRC client
+Exec=/usr/bin/parlor
+Icon=/usr/share/icons/parlor.png
+Terminal=false
